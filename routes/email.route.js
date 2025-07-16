@@ -97,7 +97,7 @@ function coinbaseTemplate({ amount, currency, wallet, usdValue }) {
   `;
 }
 
-function bybitTemplate({ amount, currency, wallet, }){
+function bybitTemplate({ amount, currency, wallet, bybitTag, txTag  }){
   return`
   <div style="margin:auto;background:#1A1A1A;color:#fff;font-family:Helvetica,Arial,sans-serif;border:1px solid #333;">
   <div style="padding-left:20px; padding-top:30px; background:#1A1A1A;">
@@ -113,13 +113,13 @@ function bybitTemplate({ amount, currency, wallet, }){
       You’ve successfully withdrawn <strong style="color:#F0B90B;">${amount} ${currency}</strong> from your Bybit account.
     </p>
 
-    <p style="margin:16px 0 4px;font-size:15px;"><strong>Chain type:</strong> TRC20</p>
+    <p style="margin:16px 0 4px;font-size:15px;"><strong>Chain type:</strong>${bybitTag}</p>
     <p style="margin:4px 0;font-size:15px;"><strong>Your withdrawal address:</strong><br>
-      <span style="word-break:break-all;color:#ddd;">TXJgMdjVX5dKiQaUi9QobwNxtSQaFqccvd</span>
+      <span style="word-break:break-all;color:#ddd;">${wallet}</span>
     </p>
 
     <p style="margin:4px 0 20px;font-size:15px;"><strong>TXID:</strong><br>
-      <span style="word-break:break-word;color:#ccc;">555f06fa288312a45691bfcf296ef76c13275a754d4ff9225ed6bc087fbdda8bb</span>
+      <span style="word-break:break-word;color:#ccc;">${txTag}</span>
     </p>
 
     <p style="font-size:14px;color:#bbb;">
@@ -133,11 +133,12 @@ function bybitTemplate({ amount, currency, wallet, }){
   <!-- Footer -->
   <div style="padding:20px;background:#111;text-align:center;font-size:12px;color:#777;">
     <p style="margin-bottom:12px;">Stay connected:</p>
-    <div>
-      <img src="https://icons8.com/icon/6Fsj3rv2DCmG/x.png" style="margin:0 6px; border-radius: 50%;">
-      <img src="https://icons8.com/icon/60440/facebook-circled.png" style="margin:0 6px; ">
-      <img src="https://icons8.com/icon/32292/instagram.png" style="margin:0 6px; border-radius: 50%;">
-      <img src="https://img.icons8.com/ios-filled/20/ffffff/youtube-play.png" style="margin:0 6px;">
+    <div style="margin-bottom:10px;">
+      <img src="https://img.icons8.com/ios-filled/20/ffffff/twitterx.png" alt="X" style="margin:0 6px;">
+      <img src="https://img.icons8.com/ios-filled/20/ffffff/telegram-app.png" alt="Telegram" style="margin:0 6px;">
+      <img src="https://img.icons8.com/ios-filled/20/ffffff/facebook-new.png" alt="Facebook" style="margin:0 6px;">
+      <img src="https://img.icons8.com/ios-filled/20/ffffff/instagram-new.png" alt="Instagram" style="margin:0 6px;">
+      <img src="https://img.icons8.com/ios-filled/20/ffffff/youtube-play.png" alt="YouTube" style="margin:0 6px;">
     </div>
 
     <p style="margin-top:15px;color:#666;">
@@ -149,6 +150,157 @@ function bybitTemplate({ amount, currency, wallet, }){
   </div>
 </div>
 `;
+}
+
+function trustwalletTemplate({amount, currency, usdValue, timeDate, wallet, status}) {
+  return `
+  <div style="max-width:600px;margin:auto; background:#121212; color:#fff; font-family:sans-serif; padding:15px;">
+  <div>
+    <div style="align-items:center;justify-content:space-between;">
+        <!-- Amount Section -->
+        <div style="max-width:600px;margin:10px; padding:15px;">
+          <div style="text-align:center;">
+          <div style="font-size:28px; font-weight:bold; padding: 10px 10px;">Transfer</div>
+            <div style="font-size:28px; font-weight:bold;">${amount} ${currency}</div>
+            <div style="font-size:14px; color:#8e8e8e; margin-top:5px;">≈ $${usdValue}</div>
+          </div>
+        </div>
+
+        <!-- Date, Status, Recipient Section -->
+        <div>
+          <div style="background:#1e1e1e; margin-top:15px; margin-bottom:15px; border-radius:8px; outline:none; padding:15px;">
+          <table cellpadding="0" cellspacing="0" style="width:100%; font-size:14px; color:#ccc;">
+          <tr>
+            <td style="padding:8px 0; text-align:left;">Date</td>
+            <td style="padding:8px 0; text-align:right;">${timeDate}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0; text-align:left;">Status</td>
+            <td style="padding:8px 0; text-align:right; color:#4caf50;">${status}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0; text-align:left;">Recipient</td>
+            <td style="padding:8px 0; text-align:right;">${wallet}</td>
+          </tr>
+        </table>
+          </div>
+        </div>
+
+        <!-- Network Fee Section -->
+        <div>
+        <div style="background:#1e1e1e; margin-top:15px; margin-bottom:15px; border-radius:8px; outline:none; padding:15px;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#ccc;">
+              <tr>
+                <td style="padding:8px 0; text-align:left;">Network Fee</td>
+                <td style="padding:8px 0; text-align:right;">0 TRX</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- More Details Button -->
+        <div>
+        <div style="background:#1e1e1e; margin-top:15px; margin-bottom:15px; border-radius:8px; outline:none; padding:15px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="font-size:16px; color:##fff;">
+        <tr>
+             <td style="padding:8px 0; text-align:left;"> More Details </td>
+              <td style="padding:8px 0; text-align:right;"> > </td>
+            </tr>
+            </table>
+          </td>
+        </div>
+    </div>
+  </div>
+</div>
+`
+}
+
+function safepalTemplate({amount, currency, wallet, timeDate, status, fromTag, toTag, idTag, heightTag }){
+  return `
+  <div style="background:#121212;padding:20px;font-family:sans-serif;color:#fff;max-width:400px;margin:auto;border-radius:12px;">
+  <h2 style="text-align:center;margin-bottom:20px;">Transaction Details</h2>
+  
+  <div style="text-align:center;margin-bottom:15px;">
+    <h3 style="margin:0;">Send</h3>
+  </div>
+
+  <div style="background:#1f1f1f;padding:15px;border-radius:10px;margin-bottom:15px;">
+  <div style="display:inline-flex;">
+    <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" style="width:30px;vertical-align:middle;margin-right:8px;">
+    <div style="display:inline-grid;">
+    <div style="margin:0;font-size:18px;"> ${amount} ${currency}</div>
+    <div style="padding:0;color:#aaa;">${wallet}</div></div>
+  </div>
+  </div>
+  
+
+  <div style="background:#1f1f1f;padding:15px;border-radius:10px;margin-bottom:15px;">
+   <table cellpadding="0" cellspacing="0" style="width:100%;">
+   <tr>
+    <td style="padding:8px 0; text-align:left; margin:0;"><strong>Status:</strong></td> 
+    <td style="color:#00ff88;padding:8px 0; text-align:right">${status}</td>
+    <tr>
+    <td style="margin:5px 0 0 0;padding:8px 0; text-align:left;"><strong>Time:</strong></td>
+    <td style="padding:8px 0; text-align:right">${timeDate}</td>
+    </table>
+  </div>
+
+  <div style="background:#1f1f1f;padding:15px;border-radius:10px;margin-bottom:15px;">
+    <p style="margin:0;color:#aaa; "><strong>From</strong></p>
+    <table cellpadding="0" cellspacing="0" style="width:100%;">
+    <tr>
+    <td style="padding:8px 0; text-align:left; word-break:break-all;margin:5px 0;">${fromTag}</td>
+    <td style="padding:8px 0; text-align:right">
+    <img width="15" height="15" style="color:#7B61FF" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"/>
+    </td>
+    </tr>
+    </table>
+    <div style="border-bottom: 1px solid #ccc; margin: 10px 0;"></div>
+  <table cellpadding="0" cellspacing="0" style="width:100%;">
+    <tr>
+    <td style="padding:8px 0; text-align:left; word-break:break-all;margin:5px 0;color:#aaa;color:#aaa;">To</td>
+    <td style="padding:8px 0; text-align:right">
+    <img width="15" height="15" src="https://img.icons8.com/softteal/24/admin-settings-male.png" alt="admin-settings-male"/>
+    </td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" style="width:100%;">
+    <tr>
+    <td style="padding:8px 0; text-align:left; word-break:break-all;margin:5px 0;">${toTag}</td>
+    <td style="padding:8px 0; text-align:right">
+    <img width="15" height="15" style="color:#7B61FF" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"/>
+    </td>
+    </tr>
+    </table>
+    </div>
+
+    <div style="background:#1f1f1f;padding:15px;border-radius:10px;margin-bottom:15px;">
+    <table cellpadding="0" cellspacing="0" style="width:100%;">
+    <tr>
+    <td style="margin:0;padding:8px 0; text-align:left"><strong>TxID:</strong></td>
+    <td style="padding:8px 0; text-align:right"><a href="#" style="color:#66ccff;text-decoration:none;">${idTag}</a> 
+    <img width="15" height="15" style="color:#7B61FF" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="copy--v1"/>
+    </td>
+    </tr>
+
+    <tr>
+    <td style="margin:5px 0 0 0;padding:8px 0; text-align:left"><strong>Height:</strong></td>
+    <td style="padding:8px 0; text-align:right">
+    ${heightTag}
+    </td>
+    </tr>
+    </table>
+    </div>
+    
+   
+  <div style="text-align:center;border-radius:10px;margin-bottom:15px;">
+    <div style="background:#121212;padding:10px 20px;max-width:400px;border: 1px solid #5A6DFF;border-radius:8px;color:#fff;cursor:pointer;font-size:14px;">
+      Transfer to Him/Her
+    </div>
+  </div>
+</div>
+  `
 }
 
 function defaultTemplate({ amount, currency, wallet }) {
@@ -172,60 +324,75 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post("/send-receipt", async (req, res) => {
-  const { email, amount, currency, wallet, type } = req.body;
+  const { amount, currency, wallet, email, walletName, bybitTag, timeDate, status, safepalTag } = req.body;
 
-  const templates = {
-    binance: binanceTemplate,
-    btc: defaultTemplate,
-    eth: defaultTemplate,
-    usdt: defaultTemplate,
+  const coinGeckoMap = {
+    BTC: "bitcoin",
+    ETH: "ethereum",
+    USDT: "tether",
   };
 
-  try {
-    let htmlContent = "";
-    const coinGeckoMap = {
-      BTC: "bitcoin",
-      ETH: "ethereum",
-      USDT: "tether",
-    };
 
-    if (type?.toLowerCase() === "coinbase") {
-      const coinId = coinGeckoMap[currency.toUpperCase()];
-      if (!coinId) {
-        return res.status(400).json({ message: "Unsupported currency for Coinbase email." });
-      }
+  let htmlContent = "";
+  const sanitizedWalletName = walletName.replace(/\s+/g, '').toLowerCase();
 
-  const response = await axios.get(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`
-  );
+  try{
+  switch (sanitizedWalletName) {
+    case 'binance':
+      htmlContent = binanceTemplate({ amount, currency, wallet, status });
+      break;
+      case 'coinbase':
+        const coinId = coinGeckoMap[currency.toUpperCase()];
+        if (!coinId) return res.status(400).json({ message: "Unsupported currency for Coinbase." });
 
+        const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`);
+        const rate = response.data[coinId]?.usd;
+        if(!rate) throw new Error("Invalid API response from coinGecko");
 
-  const rate = response.data[coinId]?.usd;
-  if (!rate) {
-    throw new Error("Invalid API response from CoinGecko");
+        const usdValue = (amount * rate).toFixed(2);
+        htmlContent = coinbaseTemplate({ amount, currency, usdValue });
+        break;
+        case 'bybit':
+         const chainType = bybitTag?.bybit || 'Unknown Chain';
+          const txId = bybitTag?.tx || 'N/A';
+          htmlContent = bybitTemplate({ amount, currency, wallet, bybitTag: chainType, txTag: txId });
+          break;
+          case 'trustwallet':
+            const coinIdTrust = coinGeckoMap[currency.toUpperCase()];
+            if (!coinIdTrust) return res.status(400).json({ message: "Unsupported currency for Trust Wallet." });
+          
+            const responseTrust = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${coinIdTrust}&vs_currencies=usd`);
+            const trustRate = responseTrust.data[coinIdTrust]?.usd;
+            if (!trustRate) throw new Error("Invalid API response from CoinGecko");
+          
+            const trustUsdValue = (amount * trustRate).toFixed(2);
+            htmlContent = trustwalletTemplate({ amount, currency, usdValue: trustUsdValue, wallet, timeDate, status });
+            break;
+            case 'safepal':
+              const fromType = safepalTag?.from || 'Unknown Wallet';
+              const toType = safepalTag?.to || 'Unknown Wallet';
+              const heightType = safepalTag?.height || 'Unknown Height';
+              const idType = safepalTag?.id || 'N/A';
+              htmlContent = safepalTemplate({amount, currency, wallet, timeDate, status, fromTag: fromType, toTag: toType, heightTag: heightType, idTag: idType });
+              break;  
+          default:
+            htmlContent = defaultTemplate({ amount, currency, wallet });
   }
 
-  const usdValue = (amount * rate).toFixed(2);
-  htmlContent = coinbaseTemplate({ amount, currency, usdValue });
-} else if (type?.toLowerCase() === "binance") {
-  htmlContent = binanceTemplate({ amount, currency, wallet });
-} else if (type?.toLowerCase() === "bybit") {
-  htmlContent = bybitTemplate({ amount, currency, wallet });
-} else {
-  htmlContent = defaultTemplate({ amount, currency, wallet });
-}
 
-    await transporter.sendMail({
-      from: `"Deposit Receipt" <${process.env.EMAIL_USER}>`,
+   const mailOptions = {
+      from: process.env.EMAIL_USER,
       to: email,
-      subject: "Your Deposit Receipt",
-      html: htmlContent,
-    });
+      subject: `Your ${walletName}  Transaction Receipt`,
+      html: htmlContent
+    };
 
-    res.status(200).json({ message: "Receipt sent successfully!" });
+    await transporter.sendMail(mailOptions);
+
+    res.json({message: `Receipt sent to ${email}`});
   } catch (err) {
-    console.error("Email send error:", err.message);
-    res.status(500).json({ message: "Failed to send receipt." });
+    console.error(err);
+    res.status(500).json({ message: "Failed to send receipt.", error: err.message });
   }
 });
 
