@@ -8,10 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  username  String   @unique
-  password  String
-  avater    String?
-  createdAt DateTime @default(now())
+  id          String    @id @default(uuid())
+  email       String    @unique
+  username    String    @unique
+  password    String
+  avater      String?
+  createdAt   DateTime  @default(now())
+  otp         String?
+  otpExpires  DateTime?
+  otpVerified Boolean   @default(false)
 }

