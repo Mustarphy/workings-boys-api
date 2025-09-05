@@ -336,7 +336,7 @@ export const getUserStars = async (req, res) => {
         });
 
     } catch (err) {
-        console.error('Get user stars error:', err);
+        console.error('Get user Stars error:', err);
         return res.status(500).json({ message: "Failed to get user stars!" });
     }
 };
